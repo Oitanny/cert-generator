@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCSJ 2023</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <!-- Custom styles -->
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        #header-image {
+            width: 100%;
+        }
+
+        #content {
+            flex-grow: 1;
+        }
+
+        .form-container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        #social-icons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f9fa; /* Light background color */
+        }
+    </style>
+</head>
+<body class="container">
+
+    <!-- Header Image -->
+    <img src="header_.png" alt="Header Image">
+
+    <div id="content">
+
+        <h1 class="text-center mt-4 mb-4">Google Cloud Study Jams 2023-24</h1>
+
+        <!-- Form -->
+        <div class="form-container">
+            <form id="userForm">
+                <div class="form-group">
+                    <label for="email" class="sr-only">Enter your email:</label>
+                    <input type="email" class="form-control form-control-lg" id="email" placeholder="Enter your email" required>
+                </div>
+                <button type="button" class="btn btn-primary btn-lg" onclick="getUserInfo()">Generate Certificate</button>
+            </form>
+        </div>
+
+        <!-- Social Icons -->
+        <div id="social-icons">
+            <a href="your-social-link" target="_blank" title="YouTube"><i class="fab fa-youtube fa-2x ml-2" style="color: red;"></i></a>
+            <a href="your-social-link" target="_blank" title="Twitter"><i class="fab fa-twitter fa-2x ml-2" style="color: rgb(0, 144, 201);"></i></a>
+            <a href="your-social-link" target="_blank" title="Instagram"><i class="fab fa-instagram fa-2x ml-2" style="color: rgb(206, 45, 72);"></i></a>
+            <a href="your-social-link" target="_blank" title="LinkedIn"><i class="fab fa-linkedin fa-2x ml-2" style="color: rgb(67, 67, 255);"></i></a>
+
+            <!-- Add more social icons as needed -->
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div id="footer">
+        <p>&copy; 2023 Google Developer Student Club, MSCW. All rights reserved.</p>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js (required for some Bootstrap components) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Font Awesome JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/js/all.min.js"></script>
+
+    <script>
+         function handleResponse(response) {
+    if (response.success) {
+      // If success, show an alert with the message
+      alert(response.message);
+
+      // Optionally, you can initiate the file download using JavaScript
+      // For example, redirect the browser to the download link
+     // window.location.href = `/download/${response.fileName}`;
+    } else {
+      // If not success, show an alert with the error message
+      alert(response.message);
+    }
+  }
+        async function getUserInfo() {
+            const email = document.getElementById('email').value;
+
+            // Make a request to your server to retrieve user data based on the email
+            try {
+                const response = await fetch(`/getUserInfo?email=${encodeURIComponent(email)}`).then(response => response.json()).then(data => handleResponse(data)).catch(error => console.error('Error:', error));
+                const data = await response.json();
+
+                // Display the result
+                const resultDiv = document.getElementById('result');
+                if (data.error) {
+                    resultDiv.innerHTML = `<p class="text-danger">${data.error}</p>`;
+                } else {
+                    resultDiv.innerHTML = `<p class="text-success">Name: ${data.name}</p><p class="text-success">Link: ${data.link}</p>`;
+                }
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        }
+    </script>
+
+</body>
+</html>
