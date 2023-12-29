@@ -9,7 +9,7 @@ const path = require('path');
 
 
 let parsedData; 
-const csvData = fs.readFileSync('public/GDSC_MSCW.csv', 'utf8');
+const csvData = fs.readFileSync('GDSC_MSCW.csv', 'utf8');
 const parseCSV = () => {
     return new Promise((resolve, reject) => {
       const parser = csvparse.parse(csvData, { columns: true, delimiter: "," });
