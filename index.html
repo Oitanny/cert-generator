@@ -59,7 +59,7 @@
             <form id="userForm">
                 <div class="form-group">
                     <label for="email" class="sr-only">Enter your email:</label>
-                    <input type="email" class="form-control form-control-lg" id="email" placeholder="Enter your email" required>
+                    <input type="email" class="form-control form-control-lg" id="email" placeholder="Enter the email linked to your cloud skill boost account" required>
                 </div>
                 <button type="button" class="btn btn-primary btn-lg" onclick="getUserInfo()">Generate Certificate</button>
             </form>
@@ -106,7 +106,7 @@
                 const blob = await response.blob();
                 const link = document.createElement('a');
                 link.href = window.URL.createObjectURL(blob);
-                link.download = 'certificate.pdf';
+                link.download = 'GCSJ2023Certificate.pdf';
                 link.click();
             } else if (response.status === 404) {
                 alert('User not found.');

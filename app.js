@@ -39,7 +39,7 @@ parseCSV()
     });
   
 const app = express();
-const port = 3000;
+const port = process.env.PORT||3000;
 const generateCertificate = async (name, link, res) => {
   const doc = new PDFDocument({
     layout: "landscape",
@@ -47,7 +47,7 @@ const generateCertificate = async (name, link, res) => {
     bufferPages: true,
   });
 
-  doc.image("images/certificate_2.png", 0, 0, { width: 842 });
+  doc.image("images/certificate.png", 0, 0, { width: 842 });
   doc.fillColor("#3D3D3D");
   doc.font("fonts/OpenSans-Bold.ttf");
   doc.fontSize(29).text(name, 249, 157, {
