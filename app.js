@@ -9,7 +9,7 @@ const path = require('path');
 
 
 let parsedData; 
-const csvData = fs.readFileSync('./data_file/GDSC_MSCW.csv', 'utf8');
+const csvData = fs.readFileSync('public/GDSC_MSCW.csv', 'utf8');
 const parseCSV = () => {
     return new Promise((resolve, reject) => {
       const parser = csvparse.parse(csvData, { columns: true, delimiter: "," });
@@ -47,7 +47,7 @@ const generateCertificate = async (name, link, res) => {
     bufferPages: true,
   });
 
-  doc.image("images/certificate.png", 0, 0, { width: 842 });
+  doc.image("public/certificate.png", 0, 0, { width: 842 });
   doc.fillColor("#3D3D3D");
   doc.font("fonts/OpenSans-Bold.ttf");
   doc.fontSize(29).text(name, 249, 157, {
