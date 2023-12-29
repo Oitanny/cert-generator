@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "canvas": "^2.11.2",
+    "connect-livereload": "^0.6.1",
     "csv-parse": "^5.5.3",
     "express": "^4.18.2",
     "moment": "^2.30.1",
